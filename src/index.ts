@@ -232,9 +232,13 @@ export default class Ldap {
    * or pullAttribute instead, or addMember/removeMember to manage group memberships. These
    * methods add extra convenience.
    */
-  async modify (dn: string, operation: string, modification: any) {
+  async modify (dn: string, operation: string, modifications: any) {
+    const changeList = Array.isArray(modifications) ? modifications.map((modification) => {
+      return new Change({ operation, modification })
+    }) : new Change({operation, modifications})
+  
     return await this.useClient(async client => await new Promise<boolean>((resolve, reject) => {
-      client.modify(dn, new Change({ operation, modification }), err => {
+      client.modify(dn, changeList, err => {
         if (err) reject(err)
         else resolve(true)
       })
