@@ -234,7 +234,7 @@ export default class Ldap {
    * methods add extra convenience.
    */
   async chainModify (dn: string, changes: any) {
-    const changeList = changes.map(change => new Change(change))
+    const changeList = changes.map((change:any) => new Change(change))
   
     return await this.useClient(async client => await new Promise<boolean>((resolve, reject) => {
       client.modify(dn, changeList, err => {

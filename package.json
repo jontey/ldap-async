@@ -15,7 +15,9 @@
   "types": "dist/index.d.ts",
   "typesVersions": {
     "*": {
-      "client": ["./dist/client.d.ts"]
+      "client": [
+        "./dist/client.d.ts"
+      ]
     }
   },
   "scripts": {
